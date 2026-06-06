@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Power BI Employee - Multi-Agent Copilot</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Markdown Parser -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="background-decor decor-1"></div>
+    <div class="background-decor decor-2"></div>
+    <div class="background-decor decor-3"></div>
+
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="logo">
+                <i class="fa-solid fa-chart-line logo-icon"></i>
+                <h1>Digital Power BI Employee</h1>
+            </div>
+            <p class="subtitle">Multi-Agent AI developer system that profiles data, builds schemas, generates DAX, and designs reports.</p>
+        </header>
+
+        <!-- Main Grid Layout -->
+        <main class="app-main">
+            
+            <!-- Left Panel: Input & Settings -->
+            <section class="panel-left">
+                <!-- Step 1: Upload File -->
+                <div class="card glassmorphic-card" id="upload-card">
+                    <div class="card-header">
+                        <span class="step-num">1</span>
+                        <h2>Upload Dataset</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="drag-drop-zone" id="drop-zone">
+                            <i class="fa-solid fa-file-excel excel-icon"></i>
+                            <p class="drag-text">Drag & drop your Excel file here or <span class="browse-link">browse</span></p>
+                            <p class="file-limits">Supports .xlsx and .xls formats</p>
+                            <input type="file" id="file-input" accept=".xlsx, .xls" style="display: none;">
+                        </div>
+                        <div class="file-details" id="file-details" style="display: none;">
+                            <div class="file-info">
+                                <i class="fa-solid fa-file-excel icon-green"></i>
+                                <div class="name-size">
+                                    <span class="file-name" id="selected-file-name">sales_data.xlsx</span>
+                                    <span class="file-size" id="selected-file-size">45 KB</span>
+                                </div>
+                            </div>
+                            <button class="btn-clear" id="btn-clear" title="Remove file"><i class="fa-solid fa-xmark"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 2: Data Profile Preview (Hidden until file is uploaded) -->
+                <div class="card glassmorphic-card" id="profile-card" style="display: none;">
+                    <div class="card-header">
+                        <span class="step-num">2</span>
+                        <h2>Programmatic Profile</h2>
+                    </div>
+                    <div class="card-body">
+                        <p class="profile-desc">Spreadsheet analyzed successfully. Available tables/sheets:</p>
+                        <div class="sheet-badges" id="sheet-list">
+                            <!-- Sheets badges go here -->
+                        </div>
+                        <button class="btn-secondary" id="btn-view-profile">
+                            <i class="fa-solid fa-magnifying-glass-chart"></i> View Metadata Summary
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Step 3: Natural Language Prompt -->
+                <div class="card glassmorphic-card disabled-card" id="prompt-card">
+                    <div class="card-header">
+                        <span class="step-num">3</span>
+                        <h2>Define Intentions</h2>
+                    </div>
+                    <div class="card-body">
+                        <label for="prompt-input" class="input-label">What KPIs, visualizations, or relationships do you need?</label>
+                        <textarea id="prompt-input" disabled placeholder="e.g. Profile the columns, design a star schema, write measures for Monthly Sales and Year-over-Year Revenue Growth, and suggest report layout..." rows="4"></textarea>
+                        
+                        <button class="btn-primary" id="btn-run" disabled>
+                            <i class="fa-solid fa-play"></i> Deploy Multi-Agent System
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Right Panel: Execution & Report Output -->
+            <section class="panel-right">
+                
+                <!-- Initial Placeholder Panel -->
+                <div class="card glassmorphic-card flex-center" id="output-placeholder">
+                    <div class="placeholder-content">
+                        <i class="fa-solid fa-robot pulse-icon"></i>
+                        <h3>Your Virtual Developer Workspace</h3>
+                        <p>Upload a data file and enter your business goals to activate the multi-agent system workspace.</p>
+                    </div>
+                </div>
+
+                <!-- Progress State (Visible during run) -->
+                <div class="card glassmorphic-card" id="run-progress-card" style="display: none;">
+                    <div class="card-header">
+                        <h2>Multi-Agent Pipeline Active</h2>
+                        <span class="pulse-dot"></span>
+                    </div>
+                    <div class="card-body">
+                        <p class="active-status-msg" id="status-message">Bootstrapping agent network...</p>
+                        
+                        <!-- Agent Workflow Graph -->
+                        <div class="workflow-nodes">
+                            <div class="node-wrapper" id="node-data_profiler">
+                                <div class="node-icon"><i class="fa-solid fa-chart-bar"></i></div>
+                                <span class="node-label">Data Profiler</span>
+                                <span class="node-status">Pending</span>
+                            </div>
+                            <div class="node-arrow"><i class="fa-solid fa-angle-right"></i></div>
+                            
+                            <div class="node-wrapper" id="node-model_architect">
+                                <div class="node-icon"><i class="fa-solid fa-sitemap"></i></div>
+                                <span class="node-label">Model Architect</span>
+                                <span class="node-status">Pending</span>
+                            </div>
+                            <div class="node-arrow"><i class="fa-solid fa-angle-right"></i></div>
+
+                            <div class="node-wrapper" id="node-dax_engineer">
+                                <div class="node-icon"><i class="fa-solid fa-code"></i></div>
+                                <span class="node-label">DAX Engineer</span>
+                                <span class="node-status">Pending</span>
+                            </div>
+                            <div class="node-arrow"><i class="fa-solid fa-angle-right"></i></div>
+
+                            <div class="node-wrapper" id="node-tmdl_specialist">
+                                <div class="node-icon"><i class="fa-solid fa-gears"></i></div>
+                                <span class="node-label">TMDL Specialist</span>
+                                <span class="node-status">Pending</span>
+                            </div>
+                            <div class="node-arrow"><i class="fa-solid fa-angle-right"></i></div>
+
+                            <div class="node-wrapper" id="node-ux_advisor">
+                                <div class="node-icon"><i class="fa-solid fa-palette"></i></div>
+                                <span class="node-label">UX Advisor</span>
+                                <span class="node-status">Pending</span>
+                            </div>
+                            <div class="node-arrow"><i class="fa-solid fa-angle-right"></i></div>
+
+                            <div class="node-wrapper" id="node-final_compiler">
+                                <div class="node-icon"><i class="fa-solid fa-file-contract"></i></div>
+                                <span class="node-label">Final Compiler</span>
+                                <span class="node-status">Pending</span>
+                            </div>
+                        </div>
+
+                        <!-- Progress Bar -->
+                        <div class="progress-bar-container">
+                            <div class="progress-bar-fill" id="progress-bar-fill"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Final Report Result Panel (Visible upon completion) -->
+                <div class="card glassmorphic-card" id="report-result-card" style="display: none;">
+                    <div class="card-header flex-between">
+                        <h2>Power BI Developer Handbook</h2>
+                        <div class="action-buttons">
+                            <button class="btn-action" id="btn-copy-md" title="Copy Raw Markdown"><i class="fa-regular fa-copy"></i> Copy MD</button>
+                            <button class="btn-action" id="btn-download-md" title="Download Markdown File"><i class="fa-solid fa-download"></i> Download MD</button>
+                            <a class="btn-action" id="btn-download-pbip" style="display: none; text-decoration: none; background: linear-gradient(135deg, #10B981, #059669); color: white; border: none; padding: 0.6rem 1rem; border-radius: 0.5rem; font-weight: 600; cursor: pointer; transition: all 0.3s ease;" title="Download Power BI Project"><i class="fa-solid fa-file-zipper"></i> Download .pbip</a>
+                        </div>
+                    </div>
+                    <div class="card-body scrollable-content">
+                        <!-- Markdown render container -->
+                        <div class="markdown-body" id="markdown-output"></div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Metadata Modal Dialog -->
+    <div class="modal" id="profile-modal">
+        <div class="modal-content glassmorphic-card">
+            <div class="modal-header">
+                <h2>Excel Dataset Profiler Summary</h2>
+                <button class="modal-close" id="modal-close-btn">&times;</button>
+            </div>
+            <div class="modal-body scrollable-content" id="modal-body-content">
+                <!-- Structured profile markdown output -->
+            </div>
+        </div>
+    </div>
+    
+    <script src="/static/script.js"></script>
+</body>
+</html>
