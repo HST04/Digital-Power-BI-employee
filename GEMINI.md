@@ -28,7 +28,7 @@ Start with 1-2 eval cases, run `make eval`, iterate. Expect 5-10+ iterations. Se
 Run `make test`. Fix issues until all tests pass.
 
 ### Phase 5: Deploy to Dev
-**Requires explicit human approval.** Run `make deploy` only after user confirms. See the **Deployment Guide** for details.
+**Requires explicit human approval.** This repository does not currently include a `make deploy` target. If deployment is needed, run `uvx agent-starter-pack enhance` first to add deployment targets, then follow the generated deployment flow. See the **Deployment Guide** for details.
 
 ### Phase 6: Production Deployment
 Ask the user: Option A (simple single-project) or Option B (full CI/CD pipeline with `uvx agent-starter-pack setup-cicd`). See the [deployment docs](https://raw.githubusercontent.com/GoogleCloudPlatform/agent-starter-pack/refs/heads/main/docs/guide/deployment.md) for step-by-step instructions.
@@ -42,8 +42,8 @@ Ask the user: Option A (simple single-project) or Option B (full CI/CD pipeline 
 | `make eval` | Run evaluation against evalsets |
 | `make eval-all` | Run all evalsets |
 | `make lint` | Check code quality |
-| `make setup-dev-env` | Set up dev infrastructure (Terraform) |
-| `uvx agent-starter-pack enhance` (or equivalent) | Add a deployment target to enable `make deploy` |
+| `uvx agent-starter-pack enhance` | Add deployment targets (including `make deploy`) |
+| `uvx agent-starter-pack setup-cicd` | Set up CI/CD pipeline and infrastructure |
 
 ---
 
