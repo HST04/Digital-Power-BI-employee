@@ -42,6 +42,8 @@ make install && make playground
 | `make playground`    | Launch local development environment                                                        |
 | `make lint`          | Run code quality checks                                                                     |
 | `make test`          | Run unit and integration tests                                                              |
+| `make eval`          | Run ADK evaluation on the default or specified evalset                                      |
+| `make eval-all`      | Run ADK evaluation across all evalsets in `tests/eval/evalsets`                            |
 
 For full command options and usage, refer to the [Makefile](Makefile).
 
@@ -63,13 +65,9 @@ See the [development guide](https://googlecloudplatform.github.io/agent-starter-
 
 ## Deployment
 
-```bash
-gcloud config set project <your-project-id>
-make deploy
-```
-
-To add CI/CD and Terraform, run `uvx agent-starter-pack enhance`.
-To set up your production infrastructure, run `uvx agent-starter-pack setup-cicd`.
+`make deploy` is not currently available in this repository's `Makefile`.
+If you need deployment targets, first run `uvx agent-starter-pack enhance`, then follow the generated deployment flow.
+For full CI/CD and infrastructure setup, run `uvx agent-starter-pack setup-cicd`.
 See the [deployment guide](https://googlecloudplatform.github.io/agent-starter-pack/guide/deployment) for details.
 
 ## Observability
